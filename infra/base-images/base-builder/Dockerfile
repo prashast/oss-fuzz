@@ -61,17 +61,17 @@ ENV FUZZER_LDFLAGS ""
 
 WORKDIR $SRC
 
-ADD http://lcamtuf.coredump.cx/afl/releases/afl-latest.tgz $SRC/
+ADD http://lcamtuf.coredump.cx/afl/releases/afl-2.50b.tgz $SRC/
 RUN mkdir afl && \
     cd afl && \
-    tar -xzv --strip-components=1 -f $SRC/afl-latest.tgz && \
+    tar -xzv --strip-components=1 -f $SRC/afl-2.50b.tgz && \
     rm -rf $SRC/afl-latest.tgz
 
-ADD https://github.com/google/honggfuzz/archive/oss-fuzz.tar.gz $SRC/
+COPY honggfuzz.tar.gz $SRC/
 RUN mkdir honggfuzz && \
     cd honggfuzz && \
-    tar -xzv --strip-components=1 -f $SRC/oss-fuzz.tar.gz && \
-    rm -rf $SRC/oss-fuzz.tar.gz
+    tar -xzv --strip-components=1 -f $SRC/honggfuzz.tar.gz && \
+    rm -rf $SRC/honggfuzz.tar.gz
 
 COPY compile compile_afl compile_dataflow compile_libfuzzer compile_honggfuzz \
     srcmap write_labels.py /usr/local/bin/

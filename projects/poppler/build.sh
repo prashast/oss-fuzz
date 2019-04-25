@@ -17,6 +17,7 @@
 
 pushd $SRC/freetype2
 ./autogen.sh
+sync
 ./configure --prefix="$WORK" --disable-shared PKG_CONFIG_PATH="$WORK/lib/pkgconfig"
 make -j$(nproc)
 make install
